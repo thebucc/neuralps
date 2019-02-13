@@ -133,7 +133,7 @@ class DiLiGenT(PSDatasetBase):
             # ballPNG_Normal_l2
             file = '{0}_Normal_{1}'.format(self._paths[i], self._prior_name)
             N = scipy.io.loadmat(os.path.join(self._root_dir, 'estNormalNonLambert', file+'.mat'))
-            key = 'Normal_L2'
+            key = sorted(list(N.keys()))[0] # assume we variable we want is the first element that doesn't start with '__'
             N = np.array(N[key]).astype(np.float32)
             N = np.transpose(N, (2, 0, 1))
 
