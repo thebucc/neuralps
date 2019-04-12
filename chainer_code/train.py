@@ -83,6 +83,7 @@ def main():
 
     parser.add_argument('--gray', '-gray', type=str2bool, default=False, help='use gray images')
     parser.add_argument('--debug', '-debug', type=str2bool, default=False, help='Position of brdf channel blending')
+    parser.add_argument('--input', '-i', type=str, default='../data/DiLiGenT', help='directory of input data')
 
     args = parser.parse_args()
 
@@ -107,7 +108,8 @@ def main():
         m_list.sort()   # Sorting does matter!!
     
     t = args.target
-    targets = dataset.DiLiGenT.DiLiGenT('../data/DiLiGenT', measure_num=args.samplenum, m_list=m_list, as_gray=args.gray, prior_name=args.prior_name)
+    dataDir = args.input
+    targets = dataset.DiLiGenT.DiLiGenT(dataDir, measure_num=args.samplenum, m_list=m_list, as_gray=args.gray, prior_name=args.prior_name)
     train = targets[t:t+1] if t >= 0 else [ta for ta in targets]
     test = train
 
